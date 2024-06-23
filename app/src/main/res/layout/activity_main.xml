@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/user_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+    <TextView
+        android:id="@+id/total_calories_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Calories"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/total_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/add_meal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Meal"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/view_logs_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Logs"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/find_ideal_calories_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Ideal Calories"
+        android:layout_gravity="center"
+        android:padding="16dp" />
+
+    <Button
+        android:text="@string/logout"
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"/>
+
+</LinearLayout>

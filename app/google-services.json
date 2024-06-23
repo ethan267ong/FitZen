@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "440747881310",
+    "firebase_url": "https://caloriecounter-22deb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "caloriecounter-22deb",
+    "storage_bucket": "caloriecounter-22deb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440747881310:android:6d6a36eb8f7505a47155cf",
+        "android_client_info": {
+          "package_name": "com.example.caloriecounter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440747881310-ple03r0vpfs0scvi88p63mp1ldmsp10b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.caloriecounter",
+            "certificate_hash": "71153356ef2ff8bf3a7da15c8fbd1aa2a52952fa"
+          }
+        },
+        {
+          "client_id": "440747881310-r6sngde20m1lm43p39uurlq17o0993pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfvA5ejzovkEv54C9oKhOQFeIUdRib8_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440747881310-r6sngde20m1lm43p39uurlq17o0993pu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

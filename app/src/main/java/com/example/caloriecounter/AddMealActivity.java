@@ -21,6 +21,7 @@ public class AddMealActivity extends AppCompatActivity {
     private EditText mealNameEditText, caloriesEditText;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private final int i = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

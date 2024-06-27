@@ -54,43 +54,24 @@
         android:textSize="16sp"
         android:layout_marginTop="16dp"/>
 
-    <RadioGroup
-        android:id="@+id/lifestyle_radio_group"
+    <Spinner
+        android:id="@+id/lifestyle_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:entries="@array/lifestyle_options" />
 
-        <RadioButton
-            android:id="@+id/sedentary_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sedentary" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Goal:"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
 
-        <RadioButton
-            android:id="@+id/lightly_active_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lightly Active" />
-
-        <RadioButton
-            android:id="@+id/moderately_active_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Moderately Active" />
-
-        <RadioButton
-            android:id="@+id/very_active_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Very Active" />
-
-        <RadioButton
-            android:id="@+id/extremely_active_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Extremely Active" />
-
-    </RadioGroup>
+    <Spinner
+        android:id="@+id/goal_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/goal_options" />
 
     <TextView
         android:id="@+id/maintenance_calories_text_view"

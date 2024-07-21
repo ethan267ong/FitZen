@@ -1,14 +1,22 @@
 package com.example.caloriecounter;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     FirebaseFirestore db;
-    Button logout_button, addMealButton, viewLogsButton, calculateButton;
+    ImageView addMealButton, viewLogsButton, calculateButton, workOutButton;
+
+    Button logout_button;
 
     TextView user_details, totalCaloriesTextView ;
 
@@ -45,10 +56,16 @@ public class MainActivity extends AppCompatActivity {
         user_details = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
 
-        addMealButton = findViewById(R.id.add_meal_button);
-        viewLogsButton = findViewById(R.id.view_logs_button);
-        calculateButton = findViewById(R.id.find_ideal_calories_button);
+        addMealButton = findViewById(R.id.addMeal);
+        viewLogsButton = findViewById(R.id.viewLog);
+        calculateButton = findViewById(R.id.calculateCalories);
+        workOutButton = findViewById(R.id.exerciseProgs);
         totalCaloriesTextView = findViewById(R.id.total_calories);
+
+        // for notification
+        NotificationUtils.createNotificationChannel(this);
+        requestNotificationPermission();
+
 
         //double check
         if (user == null) {
@@ -79,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Calculate.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        workOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Workouts.class);
                 startActivity(intent);
                 finish();
             }
@@ -115,4 +141,63 @@ public class MainActivity extends AppCompatActivity {
             loadTotalCalories();  // Refresh total calories
         }
     }
+
+    private void scheduleMealReminders() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // 9 AM
+        scheduleAlarm(alarmManager, 9, 0, 0);
+        // 1 PM
+        scheduleAlarm(alarmManager, 13, 0, 0);
+        // 7 PM
+        scheduleAlarm(alarmManager, 21, 2, 0);
+    }
+
+    private void scheduleAlarm(AlarmManager alarmManager, int hour, int minute, int second) {
+        Intent intent = new Intent(this, MealReminderReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, hour, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, second);
+
+        if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
+    }
+
+    private static final int REQUEST_CODE_POST_NOTIFICATIONS = 1001;
+
+    private void requestNotificationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE_POST_NOTIFICATIONS);
+        } else {
+            // Permission already granted, schedule the reminders
+            scheduleMealReminders();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                scheduleMealReminders();
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Permission required to send notifications", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

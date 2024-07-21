@@ -20,7 +20,7 @@ public class Calculate extends AppCompatActivity {
     RadioGroup genderRadioGroup;
     Button calculateButton;
     TextView maintenanceCaloriesTextView;
-    Spinner lifestyleSpinner, goalSpinner;
+    Spinner lifestyleSpinner, goalSpinner, durationSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class Calculate extends AppCompatActivity {
         maintenanceCaloriesTextView = findViewById(R.id.maintenance_calories_text_view);
         goalSpinner = findViewById(R.id.goal_spinner);
         lifestyleSpinner = findViewById(R.id.lifestyle_spinner);
+        durationSpinner = findViewById(R.id.duration_spinner);
         Button backButton = findViewById(R.id.back_button);
 
         ArrayAdapter<CharSequence> lifestyleAdapter = ArrayAdapter.createFromResource(this,
@@ -42,10 +43,15 @@ public class Calculate extends AppCompatActivity {
         lifestyleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         lifestyleSpinner.setAdapter(lifestyleAdapter);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> goaladapter = ArrayAdapter.createFromResource(this,
                 R.array.goal_options, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        goalSpinner.setAdapter(adapter);
+        goaladapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        goalSpinner.setAdapter(goaladapter);
+
+        ArrayAdapter<CharSequence> durationadapter = ArrayAdapter.createFromResource(this,
+                R.array.duration_options, android.R.layout.simple_spinner_item);
+        durationadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        durationSpinner.setAdapter(durationadapter);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +80,7 @@ public class Calculate extends AppCompatActivity {
         String gender = selectedGenderRadioButton.getText().toString();
         String lifestyle = lifestyleSpinner.getSelectedItem().toString();
         String goal = goalSpinner.getSelectedItem().toString();
+        String duration = durationSpinner.getSelectedItem().toString();
 
         // Validate input
         if (height <= 0 || weight <= 0) {
@@ -133,9 +140,13 @@ public class Calculate extends AppCompatActivity {
                 calorieAdjustment = 0;
                 break;
         }
-        double finalCalories = maintenanceCalories + calorieAdjustment;
 
-        maintenanceCaloriesTextView.setText("" + finalCalories);
+        int weeks = Integer.parseInt(duration.split(" ")[0]); // Extract number of weeks from the spinner text
+        double dailyAdjustment = (calorieAdjustment / 7) / (weeks); // Calculate daily adjustment for the selected duration
+
+        double finalCalories = maintenanceCalories + dailyAdjustment;
+
+        maintenanceCaloriesTextView.setText(String.format("%.2f", finalCalories));
     }
 }
 

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-
-    <Button
-        android:id="@+id/date_picker_button"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pick A Date"
-        android:layout_gravity="center"
-        android:padding="16dp"
-        android:backgroundTint="#00008B"/>
+        android:text="Select a Work-Out Programme:"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/workout_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/workout_options" />
 
     <Button
         android:id="@+id/back_button"
@@ -22,12 +26,5 @@
         android:layout_gravity="center"
         android:text="Back"
         android:backgroundTint="#00008B"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp" />
-
 
 </LinearLayout>

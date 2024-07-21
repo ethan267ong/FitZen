@@ -48,9 +48,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.android.gms:play-services-auth:21.2.0")
 
-    // Add the Facebook SDK dependency
     implementation("com.facebook.android:facebook-login:16.0.0")
+
+    implementation("androidx.core:core:1.10.1")
 }
 
-// Ensure to apply the Google services plugin
 apply(plugin = "com.google.gms.google-services")

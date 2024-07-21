@@ -22,5 +22,16 @@
         <item>Very Active</item>
         <item>Extremely Active</item>
     </string-array>
+    <string-array name="workout_options">
+        <item>Muscle Building</item>
+        <item>Weight Loss</item>
+        <item>Improving Physique (maintain weight)</item>
+    </string-array>
+    <string-array name="duration_options">
+        <item>1 Week</item>
+        <item>2 Weeks</item>
+        <item>3 Weeks</item>
+        <item>4 Weeks</item>
+    </string-array>
 
 </resources>

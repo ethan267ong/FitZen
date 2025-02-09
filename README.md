@@ -8,7 +8,7 @@
 ---
 
 ## 📢 Foreword by Developers
-Welcome to the **BeDamnUpz** project! We are excited to share our journey in building this fitness application. Coming from sports backgrounds, we wanted to apply our programming skills to develop a **simple and effective app for individuals aged 20 and above** to achieve their weight goals.
+Welcome to the **FitZen** project! We are excited to share our journey in building this fitness application. Coming from sports backgrounds, we wanted to apply our programming skills to develop a **simple and effective app for individuals aged 20 and above** to achieve their weight goals.
 
 This README will walk you through our **motivation, features, project structure, and challenges**. We hope you find our work insightful and useful.
 
